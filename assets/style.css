@@ -1,0 +1,60 @@
+/* assets/style.css */
+
+/* General body styling */
+body {
+    background-color: #f0f2f6;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Title styling */
+h1 {
+    color: #4CAF50;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Sidebar styling */
+[data-testid="stSidebar"] {
+    background-color: #ffffff;
+    padding: 1rem;
+}
+
+/* Sidebar title styling */
+[data-testid="stSidebar"] h2 {
+    color: #4CAF50;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* Sidebar button styling */
+[data-testid="stSidebar"] button {
+    background-color: #4CAF50 !important;
+    border: none !important;
+    color: white !important;
+    border-radius: 5px !important;
+    margin-bottom: 0.5rem;
+}
+
+/* Input label and text styling */
+label {
+    font-size: 1.1rem;
+    color: #333;
+}
+
+/* Spacing for input widgets */
+div[data-testid="stTextInput"],
+div[data-testid="stRadio"],
+div[data-testid="stSelectbox"],
+div[data-testid="stNumberInput"] {
+    margin-bottom: 1.5rem;
+}
+
+/* General button styling */
+button[kind="primary"],
+div.stButton button {
+    background-color: #4CAF50;
+    border: none;
+    padding: 0.5rem 1rem;
+    color: white;
+    border-radius: 5px;
+}
