@@ -1,0 +1,9 @@
+langchain
+langchain-ollama
+langchain-openai
+langchain-community
+langchain-core
+python-dotenv
+
+#Also don't forget to install the ollama cli
+
