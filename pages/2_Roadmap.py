@@ -40,7 +40,9 @@ def generate_roadmap(topic, time_steps, num_steps, purpose, role=None, job_descr
 
     for heading in headings:
         ph = st.empty()  # Create a placeholder for the heading status
-        ph.markdown(f"**{heading}**: Generating... :hourglass_flowing_sand:")
+        # ph.markdown(f"**{heading}**: Generating... :hourglass_flowing_sand:")
+        ph.markdown(f'<div class="loading-placeholder"><strong>{heading}</strong>: Generating... :hourglass_flowing_sand:</div>', unsafe_allow_html=True)
+
         title = heading
         if purpose == "Interview Prep":
             text = generate_interview_response(topic, heading, role, job_description)
@@ -106,6 +108,9 @@ elif "submitted" in st.session_state:
     # Save the submission to MongoDB Atlas using your helper function from db.py
     insert_roadmap(entry)
 
+    if "submitted" in st.session_state:
+            del st.session_state["submitted"]
+
     st.success("Roadmap generation completed!")
 
 if roadmap_array:
@@ -130,8 +135,7 @@ if roadmap_array:
         else:
             # Insert an HTML anchor for internal navigation
             anchor = section["title"].replace(" ", "-")
-            st.markdown(f'<a name="{anchor}"></a>', unsafe_allow_html=True)
-            # st.header(section["title"])
+            st.markdown(f'<a name="{anchor}" style="font-size: 2rem;" >{section["title"]} </a>', unsafe_allow_html=True)
             st.markdown(section["text"], unsafe_allow_html=True)
 else:
     st.info("No roadmap content available.")

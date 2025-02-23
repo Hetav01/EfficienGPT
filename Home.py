@@ -13,18 +13,18 @@ def local_css(file_name):
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 local_css("assets/style.css")
 
-st.title("Efficient GPT")
+st.title("EfficienGPT")
 
-st.write("### What do you want to learn?")
+st.write("### What is it that you want to conquer?")
 topic = st.text_input("Enter your topic name:")
 
-st.write("### In how many steps? (Hours, Days, Weeks)")
-time_steps = st.radio("Select time frame:", ("Hours", "Days", "Weeks"))
+st.write("### In what time?")
+time_steps = st.selectbox("Select time frame:", ("Hours", "Days", "Weeks"))
 
 st.write("### Number of Steps (1-24)")
-num_steps = st.number_input("Enter number of steps:", min_value=1, max_value=24, value=6, step=1)
+num_steps = st.number_input("Enter number of steps:", min_value=1, max_value=24, value=3, step=1)
 
-st.write("### What is the need for learning? (Interview Prep, Project, Upskill)")
+st.write("### What is your purpose for learning?")
 purpose = st.selectbox("Select your purpose:", ("Interview Prep", "Project", "Upskill"))
 
 role = ""

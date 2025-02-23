@@ -1,60 +1,146 @@
 /* assets/style.css */
 
-/* General body styling */
+/* Reset defaults */
+body, h1, h2, h3, h4, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Overall body styling for dark mode */
 body {
-    background-color: #f0f2f6;
-    font-family: 'Arial', sans-serif;
+    background: #121212;  /* Dark background */
+    color: #90CAF9;       /* Light blue text for general content */
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    padding: 2rem;
+}
+
+/* Smooth transitions for hover effects */
+* {
+    transition: all 0.3s ease-in-out;
 }
 
 /* Title styling */
 h1 {
-    color: #4CAF50;
+    color: #64B5F6;  /* Brighter blue */
+    font-size: 3rem;
     text-align: center;
     margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
 }
 
-/* Sidebar styling */
+/* Header styling for sections */
+h2, h3, h4 {
+    color: #64B5F6;
+    margin-bottom: 1rem;
+}
+
+/* Dark Sidebar styling */
 [data-testid="stSidebar"] {
-    /* background-color: #ffffff; */
+    background: #1E1E1E;  /* Darker background */
+    border-radius: 10px;
     padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.4);
 }
 
-/* Sidebar title styling */
+/* Sidebar title styling with blue font */
 [data-testid="stSidebar"] h2 {
-    color: #4CAF50;
+    color: #64B5F6;
     text-align: center;
     margin-bottom: 1rem;
 }
 
+/* Increase font size for st.selectbox elements */
+div[data-testid="stSelectbox"] * {
+    font-size: 1.2rem !important;
+}
+
 /* Sidebar button styling */
 [data-testid="stSidebar"] button {
-    background-color: #4CAF50 !important;
+    background-color: #64B5F6 !important;  /* Blue buttons */
     border: none !important;
-    /* color: white !important; */
+    color: #121212 !important;             /* Dark text */
     border-radius: 5px !important;
     margin-bottom: 0.5rem;
+    cursor: pointer;
 }
 
-/* Input label and text styling */
-label {
-    font-size: 1.1rem;
-    color: #333;
+/* Input, select, and textarea styling for dark mode */
+input, select, textarea {
+    background: #1E1E1E;
+    border: 1px solid #424242;
+    color: #90CAF9;
+    border-radius: 5px;
+    padding: 0.5rem;
+    font-size: 1rem;
 }
 
-/* Spacing for input widgets */
-div[data-testid="stTextInput"],
-div[data-testid="stRadio"],
-div[data-testid="stSelectbox"],
-div[data-testid="stNumberInput"] {
-    margin-bottom: 1.5rem;
-}
-
-/* General button styling */
+/* Custom button styling */
 button[kind="primary"],
 div.stButton button {
-    background-color: #4CAF50;
+    background-color: #64B5F6;
     border: none;
-    padding: 0.5rem 1rem;
-    color: white;
+    padding: 0.75rem 1.5rem;
+    color: #121212;
+    font-size: 1rem;
     border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+}
+button[kind="primary"]:hover,
+div.stButton button:hover {
+    background-color: #42A5F5;
+    transform: scale(1.05);
+}
+
+/* Table of Contents styling */
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+ul li a {
+    color: #64B5F6;
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Loading placeholder animation with blue accent */
+.loading-placeholder {
+    animation: pulse 1.5s infinite;
+    background-color: rgba(100, 181, 246, 0.2);
+    border-radius: 5px;
+    padding: 0.5rem;
+    color: #64B5F6;
+}
+
+/* Pulse keyframes */
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+/* Fade in animation for loaded content */
+.fade-in {
+    animation: fadeIn 1s ease-in;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Roadmap section container styling */
+.roadmap-section {
+    background: #1E1E1E;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.6);
+}
+.roadmap-section:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 8px rgba(0,0,0,0.8);
 }
