@@ -230,7 +230,7 @@ def extract_headings(response):
     lines = response.split("\n")
     for line in lines:
         if line.startswith("##"):
-            headings.append(line[2:].strip())
+            headings.append(line[3:].strip())
     return headings
 
 interview_roadmap_chain = interview_roadmap_prompt_template | model | StrOutputParser()

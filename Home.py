@@ -1,19 +1,19 @@
 import streamlit as st
-import time
 import uuid
-from utils.db_functions import insert_roadmap   # Import the MongoDB insert function
-from utils.llm_response import interview_roadmap_chain, generic_roadmap_roadmap_chain, extract_headings, generate_interview_response, generate_generic_response
 from dotenv import load_dotenv
+from utils.db_functions import insert_roadmap  # For storing the roadmap if needed
+
+import streamlit as st
+from streamlit_extras.switch_page_button import switch_page
 
 load_dotenv()
 
 def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
 local_css("assets/style.css")
 
-st.title("Title Name")
+st.title("Efficient GPT")
 
 st.write("### What do you want to learn?")
 topic = st.text_input("Enter your topic name:")
@@ -34,67 +34,28 @@ if purpose == "Interview Prep":
     role = st.text_input("Enter the target role:")
     job_description = st.text_area("Enter the job description:", height=150)
 
-# Updated generate_roadmap function that returns a dictionary
-def generate_roadmap(topic, time_steps, num_steps, purpose, role=None, job_description=None):
-    
-    if purpose == "Interview Prep":
-        response = interview_roadmap_chain.invoke({
-            "topic_name": topic,
-            "input_number": num_steps,
-            "time_limit": time_steps,
-            "use_case": purpose,
-            "role": None,
-            "job_description": None
-        })
-    else:
-        response = generic_roadmap_roadmap_chain.invoke({
-            "topic_name": topic,
-            "input_number": num_steps,
-            "time_limit": time_steps,
-            "use_case": purpose
-        })
-
-    headings = extract_headings(response)
-
-    roadmap_array = []
-
-    for heading in headings:
-        title = heading
-        if purpose == "Interview Prep":
-            text = generate_interview_response(topic, heading, role, job_description)
-        else:
-            text = generate_generic_response(topic, heading, purpose)
-
-        roadmap_array.append({
-            "title": title,
-            "text": text
-        })
-
-    return roadmap_array
-        
 if st.button("Submit"):
     if topic.strip() == "":
         st.error("Please enter a topic name.")
     else:
-        with st.spinner("Generating roadmap..."):
-            roadmap_output = generate_roadmap(topic, time_steps, num_steps, purpose, role, job_description)
-        submission_id = str(uuid.uuid4())
-        entry = {
-            "id": submission_id,
-            "topic": topic,
-            "time_steps": time_steps,
-            "num_steps": num_steps,
-            "purpose": purpose,
-            "role": role,
-            "job_description": job_description,
-            "roadmap_output": roadmap_output,  # now a dictionary of expanded responses
-            "timestamp": time.time()
-        }
-        # Save the submission to MongoDB Atlas using your helper function from db.py
-        insert_roadmap(entry)
-        
-        # Optionally store the submission in session state for immediate use
-        st.session_state.current_submission = entry
-        
-        st.success("Your details have been saved and a roadmap has been generated!")
-        st.info("You can view your roadmap on the Roadmap Detail page or in 'My Roadmaps'.")
+        # Save user inputs into session state
+        st.session_state.submission_id = str(uuid.uuid4())
+        st.session_state.topic = topic
+        st.session_state.time_steps = time_steps
+        st.session_state.num_steps = num_steps
+        st.session_state.purpose = purpose
+        st.session_state.role = role
+        st.session_state.job_description = job_description
+        # Clear any previous generated roadmap output
+        if "current_submission" in st.session_state:
+            del st.session_state["current_submission"]
+
+        if "roadmap_output" in st.session_state:
+            del st.session_state["roadmap_output"]
+        st.session_state.submitted = True
+        st.success("Your details have been saved!")
+        st.info("Redirecting you to the Roadmap page...")
+        # Redirect to the Roadmap page
+        switch_page("roadmap")
+
+
