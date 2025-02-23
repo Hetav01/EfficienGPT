@@ -1,20 +1,17 @@
 import streamlit as st
-from utils.db_functions import get_db  # To query the database
+from utils.db_functions import get_db
 
 def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-# Load custom CSS
 local_css("assets/style.css")
 
 st.title("Roadmap Detail")
-
-# Navigation links
 st.markdown("[🏠 Home](/)", unsafe_allow_html=True)
 st.markdown("[My Roadmaps](./2_My_Roadmaps)", unsafe_allow_html=True)
 
-# Get query parameters from the URL (e.g. ?id=<roadmap_id>)
+# Check for a query parameter; note that experimental_get_query_params() is still in use
 query_params = st.query_params
 roadmap_id = query_params.get("id", [None])[0]
 

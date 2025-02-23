@@ -15,7 +15,7 @@ h1 {
 
 /* Sidebar styling */
 [data-testid="stSidebar"] {
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     padding: 1rem;
 }
 
@@ -30,7 +30,7 @@ h1 {
 [data-testid="stSidebar"] button {
     background-color: #4CAF50 !important;
     border: none !important;
-    color: white !important;
+    /* color: white !important; */
     border-radius: 5px !important;
     margin-bottom: 0.5rem;
 }

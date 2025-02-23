@@ -8,7 +8,7 @@ from langchain_ollama import ChatOllama
 load_dotenv()
 
 # LLama3_2 = ChatOllama(model= "llama3.2:3b-instruct-q2_K")
-LLama3_1 = ChatOllama(model= "llama3.1:8b-instruct-q3_K_L")
+model = ChatOllama(model= "llama3.1:8b-instruct-q3_K_L")
 # openAILLM = ChatOpenAI(model="gpt-4o")
 
 roadmap_prompt_template = ChatPromptTemplate.from_messages(
@@ -21,7 +21,7 @@ roadmap_prompt_template = ChatPromptTemplate.from_messages(
     ]
 )
 
-roadmap_chain = roadmap_prompt_template | LLama3_1 | StrOutputParser()
+roadmap_chain = roadmap_prompt_template | model | StrOutputParser()
 
 response = roadmap_chain.invoke({
     "topic_name": "Machine Learning",
