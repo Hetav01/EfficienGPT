@@ -200,9 +200,9 @@ interiew_response = interview_roadmap_chain.invoke({
 # print(interiew_response)
 
 generic_response = generic_roadmap_prompt_template.invoke({
-    "topic_name": "Hypothesis Testing",
+    "topic_name": "Machine Learning",
     "input_number": 2,
-    "time_limit": "Days",
+    "time_limit": "Weeks",
     "use_case": "Making a project"
 })
 
@@ -211,6 +211,3 @@ print(generic_response)
 print("\n")
 print(interiew_response)
 print("\n")
-#generated headings:
-# headings = extract_headings(generic_response)
-# print(headings)

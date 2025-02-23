@@ -19,15 +19,20 @@ openAILLM = ChatOpenAI(model="gpt-4o")
 # Define the interview prompt template
 interview_80_20_template = ChatPromptTemplate.from_messages(
     [
-        ("system", "You're an expert in condensing complex information into easy to understand concepts and is amazing at explaining those concepts clearly. Just like the Pareto 80/20 Principle. I need to learn about a particular topic in a hurry for an important job interview and you're my ultimate saviour."),
-        ("human", 
-         """
-            The topic I want to learn about is {sub_topic}. The Job interview is for a {job_title} position and the job description is as follows: {job_description}.
-            Identify and share the 20%\ of the most important learnings from this sub_topic to help me understand 80%\ of them.
+        ("system", "You're an expert in condensing complex information into easy to understand concepts and is amazing at explaining those concepts clearly. Just like the Pareto 80/20 Principle. I need to learn about a particular topic in a hurry for an important job interview and you're my ultimate saviour. You can also identify subparts in the explaination that requires me to learn the code and provides the code snippets at those necessary parts."),
+        ("human", """The topic I want to learn about is {sub_topic}. The Job interview is for a {job_title} position and the job description is as follows: {job_description}.
+            Identify and share the 20% of the most important learnings from this sub_topic to help me understand 80% of them.
+            
             This subtopic: {sub_topic} is part of learning the main topic: {topic_name} with the purpose of preparing for an interview and should be answered accordingly, so as to not have any overlap with the other subtopics.
-            Remember to include any code and resources for the same if necessary in detail. Explain the concepts in using the 80/20 principle.
-            If there's no code necessary, just don't include it. For topics that are not technical or don't require the code to be included, just don't include any code.
-            The output should only have the learning part and nothing boilerplate starting with: "Here's", etc.
+            
+            If the input time is in weeks, provide a detailed breakdown of the work to be done day by day for each week. Make sure the output is enough for a person to be busy for that input_time doing the work. If the input time is in days, provide a detailed breakdown of the work to be done hour by hour for each day. Make sure the output is humanly manageable in that time frame and not overwhelming.
+            
+            Remember to always include formulas and resources for the same if necessary in detail. Explain the concepts in using the 80/20 principle.
+            For topics that are not technical or don't have any code to be included, just don't include any code.
+            
+            If the topic is technical and requires code for understanding the topic and implementing it, then include the code snippets at all those necessary parts. Make sure to definetely include code snippets for topics related to programming, computer science, data science, machine learning, deep learning, artificial intelligence, etc.
+            
+            The output should have no boilerplate starting with: "Here's", etc. The purpose is to prepare for an interview. So make sure to include the most important things that are asked in interviews.
          """)
     ]
 )
@@ -35,22 +40,30 @@ interview_80_20_template = ChatPromptTemplate.from_messages(
 # Define the interview prompt template
 generic_80_20_template = ChatPromptTemplate.from_messages(
     [
-        ("system", "You're an expert in condensing complex information into easy to understand concepts and is amazing at explaining those concepts clearly. Just like the Pareto 80/20 Principle. I need to learn about a particular topic in a hurry for an important job interview and you're my ultimate saviour."),
-        ("human", 
-         """
-            The topic I want to learn about is {sub_topic}. The purpose is {use_case}, and the overarching topic is: {topic_name}.
-            Identify and share the 20%\ of the most important learnings from this sub_topic to help me understand 80%\ of them.
+        ("system", "You're an expert in condensing complex information into easy to understand concepts and is amazing at explaining those concepts clearly. Just like the Pareto 80/20 Principle. I need to learn about a particular topic in a hurry and you're my ultimate saviour. You can also identify subparts in the explaination that requires me to learn the code and provides the code snippets at those necessary parts."),
+        ("human", """The topic I want to learn about is {sub_topic}. The purpose is {use_case}, and the overarching topic is: {topic_name}.
+            Identify and share the 20% of the most important learnings from this sub_topic to help me understand 80% of them. Make sure the output is extensive and in detail but don't steer away from the topic or the 80/20 rule.
             This subtopic: {sub_topic} is part of learning the main topic: {topic_name} with the purpose of {use_case} and should be answered accordingly, so as to not have any overlap with the other subtopics.
-            Remember to include any code and resources for the same if necessary in detail. Explain the concepts in using the 80/20 principle.
-            If there's no code necessary, just don't include it. For topics that are not technical or don't require the code to be included, just don't include any code.
-            The output should only have the learning part and nothing boilerplate starting with: "Here's", etc.
-         """)
+            
+            If the input time is in weeks, provide a detailed breakdown of the work to be done day by day for each week. Make sure the output is enough for a person to be busy for that input_time doing the work. If the input time is in days, provide a detailed breakdown of the work to be done hour by hour for each day. Make sure the output is humanly manageable in that time frame and not overwhelming.
+            
+            Remember to always include formulas and resources for the same if necessary in detail. Explain the concepts in using the 80/20 principle.
+            For topics that are not technical or don't have any code to be included, just don't include any code.
+            
+            If the topic is technical and requires code for understanding the topic and implementing it, then include the code snippets at all those necessary parts. Make sure to definetely include code snippets for topics related to programming, computer science, data science, machine learning, deep learning, artificial intelligence, etc.
+            
+            The output should have no boilerplate starting with: "Here's", etc.
+         """
+         
+         
+         )
     ]
 )
 # Define the list of topics
 topics = ['Day 1: Foundations and Basics of BERT', 'Day 2: Generalizing to New Tasks with BERT', 'Day 3: Fine-Tuning BERT for Specific Domains', 'Day 4: Advanced Techniques and Tools for BERT', 'Day 5: Practical Applications and Case Studies with BERT', 'Day 6: Reviewing and Refining BERT for Improved Accuracy']
+# topics = ['# Week 1: Foundations and Basics of Machine Learning', '# Week 2: Supervised and Unsupervised Learning, Model Evaluation, and Hands-on Project Execution']
 
-use_case = "Making a Project"
+use_case = "Interview"
 
 # Function to generate response for a given topic
 def generate_response(topic, template):
@@ -97,7 +110,7 @@ def generate_response(topic, template):
         
     else:
         response = response_chain.invoke({
-            "topic_name": "BERT",
+            "topic_name": "Machine Learning",
             "sub_topic": topic,
             "use_case": use_case
         })
@@ -106,6 +119,6 @@ def generate_response(topic, template):
 
 # Example usage
 for topic in topics:
-    response = generate_response(topic, generic_80_20_template)
+    response = generate_response(topic, interview_80_20_template)
     print(f"Response for topic '{topic}':\n{response}\n")
     
