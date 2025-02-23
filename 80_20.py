@@ -1,10 +1,15 @@
 from dotenv import load_dotenv
+from warnings import filterwarnings
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
 from langchain.schema.runnable import RunnableLambda, RunnableParallel, RunnableSequence
 from langchain_ollama import ChatOllama
 
+#ignore warnings
+filterwarnings("ignore")
+
+# Load environment variables from .env or HOME PATH file
 load_dotenv()
 
 # LLama3_2 = ChatOllama(model= "llama3.2:3b-instruct-q2_K")
@@ -45,7 +50,7 @@ generic_80_20_template = ChatPromptTemplate.from_messages(
 # Define the list of topics
 topics = ['Day 1: Foundations and Basics of BERT', 'Day 2: Generalizing to New Tasks with BERT', 'Day 3: Fine-Tuning BERT for Specific Domains', 'Day 4: Advanced Techniques and Tools for BERT', 'Day 5: Practical Applications and Case Studies with BERT', 'Day 6: Reviewing and Refining BERT for Improved Accuracy']
 
-use_case = "Interview"
+use_case = "Making a Project"
 
 # Function to generate response for a given topic
 def generate_response(topic, template):
@@ -94,13 +99,13 @@ def generate_response(topic, template):
         response = response_chain.invoke({
             "topic_name": "BERT",
             "sub_topic": topic,
-            "use_case": "Making a Project"
+            "use_case": use_case
         })
         
     return response
 
 # Example usage
 for topic in topics:
-    response = generate_response(topic, interview_80_20_template)
+    response = generate_response(topic, generic_80_20_template)
     print(f"Response for topic '{topic}':\n{response}\n")
     

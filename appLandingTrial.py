@@ -180,16 +180,13 @@ interview_roadmap_prompt_template = ChatPromptTemplate.from_messages(
 )
 
 #write a function to extract the headings from the response into a list.
-def extract_headings(response):
-    headings = []
-    lines = response.split("\n")
-    for line in lines:
-        if line.startswith("##"):
-            headings.append(line[2:].strip())
-    return headings
+# Define the function to extract headings using RunnableLambda
+extract_headings_lambda = RunnableLambda(lambda response: [
+    line[2:].strip() for line in response.split("\n") if line.startswith("##")
+])
 
-interview_roadmap_chain = interview_roadmap_prompt_template | openAILLM | StrOutputParser()
-generic_roadmap_prompt_template = generic_roadmap_prompt_template | openAILLM | StrOutputParser()
+interview_roadmap_chain = interview_roadmap_prompt_template | openAILLM | StrOutputParser() | extract_headings_lambda
+generic_roadmap_prompt_template = generic_roadmap_prompt_template | openAILLM | StrOutputParser() | extract_headings_lambda
 
 interiew_response = interview_roadmap_chain.invoke({
     "topic_name": "3-D Printing",
@@ -203,9 +200,9 @@ interiew_response = interview_roadmap_chain.invoke({
 # print(interiew_response)
 
 generic_response = generic_roadmap_prompt_template.invoke({
-    "topic_name": "BERT",
-    "input_number": 1,
-    "time_limit": "Day",
+    "topic_name": "Hypothesis Testing",
+    "input_number": 2,
+    "time_limit": "Days",
     "use_case": "Making a project"
 })
 
@@ -215,5 +212,5 @@ print("\n")
 print(interiew_response)
 print("\n")
 #generated headings:
-headings = extract_headings(generic_response)
-print(headings)
+# headings = extract_headings(generic_response)
+# print(headings)
