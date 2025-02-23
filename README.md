@@ -1,7 +1,6 @@
+# EfficienGPT 🚀
 
-# EfficienGPT
-
-## Overview
+## Overview 🌟
 
 EfficienGPT is a **quick-learning engine** designed to optimize knowledge acquisition using the **Pareto Principle (80/20 Rule)**. By leveraging **GPT-4o**, **MongoDB Atlas**, and **Streamlit**, it provides **fast, insightful, and actionable learning experiences** tailored to individual needs.  
 
@@ -10,7 +9,7 @@ EfficienGPT allows users to:
 - Store and access knowledge instantly with **MongoDB Atlas**.  
 - Interact through a **clean, intuitive UI** powered by **Streamlit**.  
 
-## Features
+## Features ⚡
 
 - **AI-powered Learning:** Uses GPT-4o to generate **precise and actionable insights**.  
 - **Efficient Knowledge Storage:** Stores and retrieves insights securely via **MongoDB Atlas**.  
@@ -21,7 +20,7 @@ EfficienGPT allows users to:
 ---
 
 
-## Setup & Installation  
+## Setup & Installation 🛠️  
 
 ### 1. Clone the Repository  
 
@@ -50,7 +49,7 @@ pip install -r requirements.txt
 
 ---
 
-## API Key Configuration  
+## API Key Configuration 🔑  
 
 EfficienGPT requires an **OpenAI API Key** to function properly.  
 
