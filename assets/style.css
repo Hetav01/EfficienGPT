@@ -50,10 +50,18 @@ h2, h3, h4 {
     margin-bottom: 1rem;
 }
 
-/* Increase font size for st.selectbox elements */
+/* Increase font size for st.selectbox elements
 div[data-testid="stSelectbox"] * {
     font-size: 1.2rem !important;
 }
+
+div[data-testid="stTextinput"] * {
+    font-size: 1.2rem !important;
+}
+
+div[data-testid="stSelectbox"] * {
+    font-size: 1.2rem !important;
+} */
 
 /* Sidebar button styling */
 [data-testid="stSidebar"] button {
