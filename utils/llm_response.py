@@ -2,15 +2,22 @@ from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
-from langchain.schema.runnable import RunnableLambda, RunnableParallel, RunnableSequence
 from langchain_ollama import ChatOllama
-import os
+import streamlit as st
 
 load_dotenv()
 
+def get_model():
+    # Default to ChatGPT (gpt-4o) if no selection exists.
+    if "selected_model" in st.session_state and st.session_state.selected_model == "Ollama":
+        # Use your desired Ollama model name.
+        return ChatOllama(model="llama3.1:8b-instruct-q3_K_L")
+    else:
+        return ChatOpenAI(model="gpt-4o")
+
 # model = ChatOllama(model= "llama3.2:3b-instruct-q2_K")
 # model = ChatOllama(model= "llama3.1:8b-instruct-q3_K_L")
-model = ChatOpenAI(model="gpt-4o")
+model = get_model()
 
 generic_roadmap_prompt_template = ChatPromptTemplate.from_messages(
     [

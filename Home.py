@@ -2,8 +2,6 @@ import streamlit as st
 import uuid
 from dotenv import load_dotenv
 from utils.db_functions import insert_roadmap  # For storing the roadmap if needed
-
-import streamlit as st
 from streamlit_extras.switch_page_button import switch_page
 
 load_dotenv()
@@ -24,8 +22,14 @@ time_steps = st.selectbox("Select time frame:", ("Hours", "Days", "Weeks"))
 st.write("### Number of Steps (1-24)")
 num_steps = st.number_input("Enter number of steps:", min_value=1, max_value=24, value=3, step=1)
 
-st.write("### What is your purpose for learning?")
+st.write("### What is your purpose?")
 purpose = st.selectbox("Select your purpose:", ("Interview Prep", "Project", "Upskill"))
+
+# Add a switch for model selection.
+st.write("### Select LLM Model")
+model_choice = st.radio("Choose your model:", ["ChatGPT", "Ollama"], index=0, horizontal=True, help="Default is ChatGPT (gpt-4o)")
+# Save the chosen model into session state
+st.session_state.selected_model = model_choice
 
 role = ""
 job_description = ""
@@ -38,7 +42,7 @@ if st.button("Submit"):
     if topic.strip() == "":
         st.error("Please enter a topic name.")
     else:
-        # Save user inputs into session state
+        # Save user inputs into session state along with a unique submission id.
         st.session_state.submission_id = str(uuid.uuid4())
         st.session_state.topic = topic
         st.session_state.time_steps = time_steps
@@ -49,13 +53,9 @@ if st.button("Submit"):
         # Clear any previous generated roadmap output
         if "current_submission" in st.session_state:
             del st.session_state["current_submission"]
-
         if "roadmap_output" in st.session_state:
             del st.session_state["roadmap_output"]
         st.session_state.submitted = True
         st.success("Your details have been saved!")
         st.info("Redirecting you to the Roadmap page...")
-        # Redirect to the Roadmap page
         switch_page("roadmap")
-
-

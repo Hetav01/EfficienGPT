@@ -40,8 +40,8 @@ def generate_roadmap(topic, time_steps, num_steps, purpose, role=None, job_descr
 
     for heading in headings:
         ph = st.empty()  # Create a placeholder for the heading status
-        # ph.markdown(f"**{heading}**: Generating... :hourglass_flowing_sand:")
-        ph.markdown(f'<div class="loading-placeholder"><strong>{heading}</strong>: Generating... :hourglass_flowing_sand:</div>', unsafe_allow_html=True)
+        ph.markdown(f"**{heading}**: Generating... :hourglass_flowing_sand:")
+        # ph.markdown(f'<div class="loading-placeholder"><strong>{heading}</strong>: Generating... </div>', unsafe_allow_html=True)
 
         title = heading
         if purpose == "Interview Prep":
