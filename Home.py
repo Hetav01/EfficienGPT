@@ -2,8 +2,10 @@ import streamlit as st
 import time
 import uuid
 from utils.db_functions import insert_roadmap   # Import the MongoDB insert function
-from utils.llm_response2 import interview_roadmap_chain, generic_roadmap_roadmap_chain, extract_headings
-from utils.expand_timesteps import generate_response
+from utils.llm_response import interview_roadmap_chain, generic_roadmap_roadmap_chain, extract_headings, generate_interview_response, generate_generic_response
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def local_css(file_name):
     with open(file_name) as f:
@@ -37,19 +39,19 @@ def generate_roadmap(topic, time_steps, num_steps, purpose, role=None, job_descr
     
     if purpose == "Interview Prep":
         response = interview_roadmap_chain.invoke({
-            "topic_name": "3-D Printing",
-            "input_number": 1,
-            "time_limit": "week",
-            "use_case": "Interview Preparation",
+            "topic_name": topic,
+            "input_number": num_steps,
+            "time_limit": time_steps,
+            "use_case": purpose,
             "role": None,
             "job_description": None
         })
     else:
         response = generic_roadmap_roadmap_chain.invoke({
-            "topic_name": "BERT",
-            "input_number": 2,
-            "time_limit": "Day",
-            "use_case": "Making a project"
+            "topic_name": topic,
+            "input_number": num_steps,
+            "time_limit": time_steps,
+            "use_case": purpose
         })
 
     headings = extract_headings(response)
@@ -58,7 +60,10 @@ def generate_roadmap(topic, time_steps, num_steps, purpose, role=None, job_descr
 
     for heading in headings:
         title = heading
-        text = generate_response(heading, purpose)
+        if purpose == "Interview Prep":
+            text = generate_interview_response(topic, heading, role, job_description)
+        else:
+            text = generate_generic_response(topic, heading, purpose)
 
         roadmap_array.append({
             "title": title,
