@@ -118,7 +118,7 @@ OLLAMA_MODEL=mistral
 Then, run the Streamlit app as usual:  
 
 ```bash
-streamlit run app.py
+streamlit run Home.py
 ```
 
 This will use **Ollama’s locally stored model** instead of the OpenAI API.  
