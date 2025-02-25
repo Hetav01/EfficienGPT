@@ -17,6 +17,8 @@ EfficienGPT allows users to:
 - **Pareto Principle Optimization:** Ensures that only the **most important 20% of knowledge** is delivered.  
 - **Customizable Inputs:** Users define their **topic, available time, and use case** for tailored learning.  
 
+
+### Refer to out [Devpost](https://devpost.com/software/efficiengpt?ref_content=my-projects-tab&ref_feature=my_projects) link to know more about out BrickHack 11 submission!
 ---
 
 
