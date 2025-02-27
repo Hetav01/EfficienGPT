@@ -7,7 +7,9 @@ EfficienGPT is a **quick-learning engine** designed to optimize knowledge acquis
 EfficienGPT allows users to:  
 - Retrieve **focused insights** without getting overwhelmed by unnecessary details.  
 - Store and access knowledge instantly with **MongoDB Atlas**.  
-- Interact through a **clean, intuitive UI** powered by **Streamlit**.  
+- Interact through a **clean, intuitive UI** powered by **Streamlit**.
+
+[![EfficienGPT Video Demo](https://img.youtube.com/vi/7FXxDi2mhnI/0.jpg)](https://www.youtube.com/watch?v=7FXxDi2mhnI)
 
 ## Features ⚡
 
