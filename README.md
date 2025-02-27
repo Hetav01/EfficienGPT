@@ -2,14 +2,14 @@
 
 ## Overview 🌟
 
-EfficienGPT is a **quick-learning engine** designed to optimize knowledge acquisition using the **Pareto Principle (80/20 Rule)**. By leveraging **GPT-4o**, **MongoDB Atlas**, and **Streamlit**, it provides **fast, insightful, and actionable learning experiences** tailored to individual needs.  
+EfficienGPT is a **quick-learning engine** designed to optimize knowledge acquisition using the **Pareto Principle (80/20 Rule)**. By leveraging **GPT-4o**, **MongoDB Atlas**, and **Streamlit**, it provides **fast, insightful, and actionable learning experiences** tailored to individual needs. 
 
 EfficienGPT allows users to:  
 - Retrieve **focused insights** without getting overwhelmed by unnecessary details.  
 - Store and access knowledge instantly with **MongoDB Atlas**.  
 - Interact through a **clean, intuitive UI** powered by **Streamlit**.
 
-[![EfficienGPT Video Demo](https://img.youtube.com/vi/7FXxDi2mhnI/0.jpg)](https://www.youtube.com/watch?v=7FXxDi2mhnI)
+### Refer to out [Devpost](https://devpost.com/software/efficiengpt?ref_content=my-projects-tab&ref_feature=my_projects) link to know more about out the project and see our demo!
 
 ## Features ⚡
 
@@ -20,7 +20,7 @@ EfficienGPT allows users to:
 - **Customizable Inputs:** Users define their **topic, available time, and use case** for tailored learning.  
 
 
-### Refer to out [Devpost](https://devpost.com/software/efficiengpt?ref_content=my-projects-tab&ref_feature=my_projects) link to know more about out BrickHack 11 submission!
+
 ---
 
 
